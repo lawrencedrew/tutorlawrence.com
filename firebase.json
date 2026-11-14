@@ -5,7 +5,8 @@
     "cleanUrls": true,
     "trailingSlash": false,
     "redirects": [
-      { "source": "/business", "destination": "/business-english", "type": 301 }
+      { "source": "/business", "destination": "/business-english", "type": 301 },
+      { "source": "/business.html", "destination": "/business-english", "type": 301 }
     ],
     "headers": [
       {
