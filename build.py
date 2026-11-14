@@ -70,6 +70,7 @@ def render_nav(current):
 def fill(text, extra):
     values = {
         "booking": SITE["booking_url"],
+        "email": SITE["email"],
         "lessons": SITE["lessons"],
         "students": SITE["students"],
         "since": SITE["since"],

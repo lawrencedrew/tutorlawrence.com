@@ -46,6 +46,7 @@ So the routine is: make the change on a branch, check the preview, then merge in
 | `/exam-prep` | `src/pages/exam-prep.html` |
 | `/packages` | `src/pages/packages.html` |
 | `/about` | `src/pages/about.html` |
+| `/contact` | `src/pages/contact.html` |
 | `/creators` | `src/pages/creators.html` |
 | Not-found page | `src/pages/404.html` |
 
