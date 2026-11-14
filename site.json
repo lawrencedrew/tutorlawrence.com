@@ -1,0 +1,61 @@
+{
+  "site_url": "https://tutorlawrence.com",
+  "site_name": "Tutor Lawrence",
+  "owner": "Lawrence Drew",
+  "booking_url": "https://calendar.app.google/HnNBSFxX17i6heaw5",
+  "call_minutes": 30,
+  "lesson_minutes": 50,
+  "lessons": "3,600+",
+  "students": "800+",
+  "since": "2024",
+  "currency": "£",
+  "packages": {
+    "business": {
+      "name": "Business English programme",
+      "price": 350,
+      "length": "10 lessons, used within 10 weeks",
+      "includes": [
+        "A plan built on your job, your meetings and your deadlines",
+        "Your real emails, slides and reports corrected in the lesson",
+        "Written corrections after every lesson",
+        "A review at lesson 5 and lesson 10"
+      ],
+      "page": "/business-english"
+    },
+    "interview": {
+      "name": "Interview intensive",
+      "price": 120,
+      "length": "3 lessons within 10 days",
+      "includes": [
+        "Answers prepared for the questions your interviewer is likely to ask",
+        "One full mock interview",
+        "Written feedback on your answers and delivery"
+      ],
+      "page": "/business-english"
+    },
+    "ielts": {
+      "name": "IELTS sprint",
+      "price": 300,
+      "length": "8 lessons over 4 weeks",
+      "includes": [
+        "4 writing tasks marked against the band descriptors",
+        "1 full speaking mock with written feedback",
+        "Timing technique for reading and listening",
+        "A study plan for each week"
+      ],
+      "page": "/ielts"
+    },
+    "ecl": {
+      "name": "ECL C1 course",
+      "price": 375,
+      "length": "10 lessons over 5 weeks",
+      "includes": [
+        "All four papers covered: reading, writing, listening, speaking",
+        "Mock tests marked to the official criteria",
+        "A vocabulary bank for each topic group",
+        "A plan for each of the five weeks"
+      ],
+      "page": "/exam-prep"
+    }
+  }
+}

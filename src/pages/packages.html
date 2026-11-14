@@ -1,0 +1,55 @@
+<!--
+{
+  "title": "Packages and prices for English lessons | Tutor Lawrence",
+  "description": "Fixed-price packages for one-to-one English lessons online: Business English programme, interview intensive, IELTS sprint and ECL C1 course. No subscriptions."
+}
+-->
+<section class="hero page-hero">
+  <div class="wrap">
+    <h1>Packages and prices.</h1>
+    <p class="lead">Each package has a fixed length, a fixed price and a clear end point. Every lesson is {{lesson_minutes}} minutes, one-to-one, online, and taught by me.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    {{packages:business,interview,ielts,ecl}}
+    <div class="actions">
+      <a class="button" href="{{booking}}" data-booking="packages">Book a free {{call_minutes}}-minute call</a>
+    </div>
+    <p class="actions-note">Every package starts with the free call, so we both know it is the right one before you pay.</p>
+  </div>
+</section>
+
+<section class="band-sheet">
+  <div class="wrap">
+    <div class="section-head"><h2>How booking and payment work</h2></div>
+    <ol class="steps">
+      <li><h3>Free call</h3><p>We agree the package and a start date.</p></li>
+      <li><h3>Invoice</h3><p>I send an invoice with payment details. You pay before the first lesson.</p></li>
+      <li><h3>Book your lessons</h3><p>You choose lesson times from my calendar, shown in your own time zone.</p></li>
+      <li><h3>Start</h3><p>You receive a video link for each lesson and your plan for the first week.</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="section-head"><h2>Questions people ask</h2></div>
+    <div class="faq">
+      <details><summary>Which package is right for me?</summary><p>If you have an exam date, choose the exam package. If English is slowing you down at work, choose the Business English programme. If you have an interview in the next two weeks, choose the interview intensive. If none fits, tell me on the call.</p></details>
+      <details><summary>What happens if I need to move a lesson?</summary><p>Tell me at least 24 hours before and we move it at no cost. A lesson cancelled with less notice counts as taken.</p></details>
+      <details><summary>Can my employer pay?</summary><p>Yes. Give me the company details and the invoice will be addressed to your employer.</p></details>
+      <details><summary>What do I need for lessons?</summary><p>A laptop or tablet with a camera, a quiet room and a stable connection. Headphones help.</p></details>
+      <details><summary>Can I continue after a package ends?</summary><p>Yes. At the final review we look at what is left to do and you can book another package if it is worth it.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="band-ink closing">
+  <div class="wrap">
+    <h2>Not sure which one? Ask me.</h2>
+    <p>The free call takes {{call_minutes}} minutes and there is no obligation to book.</p>
+    <div class="actions"><a class="button" href="{{booking}}" data-booking="closing">Choose a time</a></div>
+  </div>
+</section>

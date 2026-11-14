@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+{{robots}}
+<link rel="canonical" href="{{canonical}}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Tutor Lawrence">
+<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:url" content="{{canonical}}">
+<meta property="og:image" content="{{site_url}}/assets/img/share.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/fonts/lexend.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css?v={{version}}">
+{{jsonld}}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="wordmark" href="/">Tutor Lawrence</a>
+    <nav id="site-nav" class="site-nav" aria-label="Main">
+      <ul>{{nav}}</ul>
+    </nav>
+    <a class="button button-small" href="{{booking}}" data-booking="header">Book a free call</a>
+    <button class="menu-button" type="button" aria-expanded="false" aria-controls="site-nav">Menu</button>
+  </div>
+</header>
+<main id="main">
+{{content}}
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <p class="wordmark">Tutor Lawrence</p>
+      <p>One-to-one English lessons online, taught from England.</p>
+    </div>
+    <ul>
+      <li><a href="/business-english">Business English</a></li>
+      <li><a href="/ielts">IELTS preparation</a></li>
+      <li><a href="/exam-prep">ECL exam preparation</a></li>
+      <li><a href="/creators">Voice coaching for creators</a></li>
+    </ul>
+    <ul>
+      <li><a href="/packages">Packages and prices</a></li>
+      <li><a href="/about">About Lawrence</a></li>
+      <li><a href="{{booking}}" data-booking="footer">Book a free call</a></li>
+    </ul>
+  </div>
+  <div class="wrap footer-small">
+    <p>© {{year}} {{owner}}, trading as Tutor Lawrence. Independent tutor, not affiliated with IELTS or the ECL Examination Centre.</p>
+  </div>
+</footer>
+<script src="/assets/js/site.js?v={{version}}" defer></script>
+</body>
+</html>

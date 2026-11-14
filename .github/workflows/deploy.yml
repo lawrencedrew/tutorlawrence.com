@@ -1,5 +1,6 @@
-name: Deploy to Firebase Hosting
+name: Deploy live site
 
+# Runs when changes reach main. Publishes to the live Firebase Hosting site.
 on:
   push:
     branches: [main]
@@ -11,11 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Build the site
+        run: python3 build.py
+
       - uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-
-      - uses: google-github-actions/setup-gcloud@v2
 
       - run: npm install -g firebase-tools
 

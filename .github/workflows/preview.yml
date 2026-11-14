@@ -1,0 +1,29 @@
+name: Deploy preview
+
+# Runs on every branch except main. Publishes the branch to a private-by-obscurity
+# preview address so changes can be checked before they go live.
+on:
+  push:
+    branches-ignore: [main]
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the site
+        run: python3 build.py
+
+      - uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+
+      - run: npm install -g firebase-tools
+
+      - name: Publish preview channel
+        run: |
+          CHANNEL=$(echo "${GITHUB_REF_NAME}" | tr -c 'a-zA-Z0-9-' '-' | cut -c1-30)
+          firebase hosting:channel:deploy "$CHANNEL" --expires 30d | tee deploy.log
+          echo "### Preview address" >> "$GITHUB_STEP_SUMMARY"
+          grep -o 'https://[^ ]*web\.app' deploy.log | tail -1 >> "$GITHUB_STEP_SUMMARY"
