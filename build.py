@@ -41,7 +41,9 @@ def render_packages(keys):
             f'<div class="package-head"><h3>{html.escape(p["name"])}</h3>'
             f'<p class="package-length">{html.escape(p["length"])}</p></div>'
             f'<ul class="package-includes">{items}</ul>'
-            f'<p class="package-price"><span class="mark">{price(p["price"])}</span></p>'
+            f'<div class="package-buy"><p class="package-price"><span class="mark">{price(p["price"])}</span></p>'
+            + (f'<a class="button" href="{html.escape(p["payment_link"])}" data-buy="{key}">Buy now</a>' if p.get("payment_link") else "")
+            + "</div>"
             f"</article>"
         )
     return f'<div class="packages">{"".join(rows)}</div>'
@@ -71,6 +73,7 @@ def fill(text, extra):
     values = {
         "booking": SITE["booking_url"],
         "email": SITE["email"],
+        "lesson_booking": SITE["lesson_booking_url"],
         "lessons": SITE["lessons"],
         "students": SITE["students"],
         "since": SITE["since"],

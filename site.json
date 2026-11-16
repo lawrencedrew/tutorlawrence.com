@@ -3,6 +3,7 @@
   "site_name": "Tutor Lawrence",
   "owner": "Lawrence Drew",
   "booking_url": "https://calendar.google.com/calendar/appointments/schedules/AcZssZ0Eh_R7pgofwU7z_kqECFy6XS1UWUz1Kao19pVooW1MWlzjq6A4-ROWSvlXC8z4jMt1elnaLJpV",
+  "lesson_booking_url": "https://calendar.app.google/HnNBSFxX17i6heaw5",
   "email": "lawrence@tutorlawrence.com",
   "call_minutes": 30,
   "lesson_minutes": 50,
@@ -21,7 +22,8 @@
         "Written corrections after every lesson",
         "A review at lesson 5 and lesson 10"
       ],
-      "page": "/business-english"
+      "page": "/business-english",
+      "payment_link": ""
     },
     "interview": {
       "name": "Interview intensive",
@@ -32,7 +34,8 @@
         "One full mock interview",
         "Written feedback on your answers and delivery"
       ],
-      "page": "/business-english"
+      "page": "/business-english",
+      "payment_link": ""
     },
     "ielts": {
       "name": "IELTS sprint",
@@ -44,7 +47,8 @@
         "Timing technique for reading and listening",
         "A study plan for each week"
       ],
-      "page": "/ielts"
+      "page": "/ielts",
+      "payment_link": ""
     },
     "ecl": {
       "name": "ECL C1 course",
@@ -56,7 +60,8 @@
         "A vocabulary bank for each topic group",
         "A plan for each of the five weeks"
       ],
-      "page": "/exam-prep"
+      "page": "/exam-prep",
+      "payment_link": ""
     }
   }
 }

@@ -236,6 +236,9 @@ a:hover { color: var(--pen-dark); }
 .package-includes { display: grid; gap: 0.5rem; }
 .package-includes li { padding-left: 1.6rem; position: relative; }
 .package-includes li::before { content: "✓"; position: absolute; left: 0; color: var(--pen); font-weight: 800; }
+.package-buy { display: grid; gap: 1rem; justify-items: start; }
+@media (min-width: 52rem) { .package-buy { justify-items: end; } }
+.package-buy .button { white-space: nowrap; }
 .package-price { font-size: var(--step-3); font-weight: 780; letter-spacing: -0.03em; line-height: 1; }
 .mark { background: linear-gradient(transparent 52%, var(--highlighter) 52%, var(--highlighter) 92%, transparent 92%); padding-inline: 0.12em; }
 
