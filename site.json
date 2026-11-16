@@ -23,7 +23,7 @@
         "A review at lesson 5 and lesson 10"
       ],
       "page": "/business-english",
-      "payment_link": ""
+      "payment_link": "https://buy.stripe.com/00wcN66qJgXedFb9w2abK00"
     },
     "interview": {
       "name": "Interview intensive",
@@ -35,7 +35,7 @@
         "Written feedback on your answers and delivery"
       ],
       "page": "/business-english",
-      "payment_link": ""
+      "payment_link": "https://buy.stripe.com/7sY28saGZ7mEbx36jQabK01"
     },
     "ielts": {
       "name": "IELTS sprint",
@@ -48,7 +48,7 @@
         "A study plan for each week"
       ],
       "page": "/ielts",
-      "payment_link": ""
+      "payment_link": "https://buy.stripe.com/7sY14o5mF8qI1Wt8rYabK02"
     },
     "ecl": {
       "name": "ECL C1 course",
@@ -61,7 +61,7 @@
         "A plan for each of the five weeks"
       ],
       "page": "/exam-prep",
-      "payment_link": ""
+      "payment_link": "https://buy.stripe.com/fZueVe2at8qI8kRfUqabK03"
     }
   }
 }
