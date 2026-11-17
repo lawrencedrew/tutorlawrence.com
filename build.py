@@ -23,6 +23,7 @@ NAV = [
     ("/ielts", "IELTS"),
     ("/exam-prep", "ECL exam prep"),
     ("/packages", "Packages"),
+    ("/guides", "Guides"),
     ("/about", "About"),
 ]
 
@@ -75,6 +76,73 @@ def render_reviews(keys):
     return '<div class="reviews">' + "".join(items) + '</div><p class="reviews-note">From reviews my students left on Preply, quoted in their own words.</p>'
 
 
+def render_guides_list(guides):
+    if not guides:
+        return ""
+    items = []
+    for g in guides:
+        m = g["meta"]
+        items.append(
+            f'<li class="guide-item"><a href="{g["path"]}"><span class="guide-title">{html.escape(m["heading"])}</span>'
+            f'<span class="guide-summary">{html.escape(m["description"])}</span></a></li>'
+        )
+    return '<ul class="guide-list">' + "".join(items) + "</ul>"
+
+
+def render_jsonld(meta, path):
+    url = SITE["site_url"] + path
+    tutor = {
+        "@type": "Person",
+        "@id": SITE["site_url"] + "/#lawrence",
+        "name": SITE["owner"],
+        "jobTitle": "English tutor",
+        "url": SITE["site_url"] + "/about",
+        "image": SITE["site_url"] + "/assets/img/lawrence-480.jpg",
+        "alumniOf": {"@type": "CollegeOrUniversity", "name": "Goldsmiths, University of London"},
+        "knowsLanguage": "en-GB",
+    }
+    business = {
+        "@type": "ProfessionalService",
+        "@id": SITE["site_url"] + "/#business",
+        "name": SITE["site_name"],
+        "url": SITE["site_url"] + "/",
+        "email": SITE["email"],
+        "image": SITE["site_url"] + "/assets/img/share.png",
+        "founder": {"@id": tutor["@id"]},
+        "areaServed": "Worldwide",
+        "availableLanguage": ["en"],
+        "description": "One-to-one online English lessons with a British tutor: Business English, IELTS and ECL exam preparation.",
+    }
+    graph = [business, tutor]
+    services = meta.get("services")
+    if services:
+        for key in services:
+            pk = SITE["packages"][key]
+            graph.append({
+                "@type": "Service",
+                "name": pk["name"],
+                "provider": {"@id": business["@id"]},
+                "areaServed": "Worldwide",
+                "url": SITE["site_url"] + pk.get("page", "/packages"),
+                "offers": {"@type": "Offer", "price": str(pk["price"]), "priceCurrency": "GBP",
+                           "description": pk["length"]},
+            })
+    if meta.get("type") == "guide":
+        graph.append({
+            "@type": "Article",
+            "headline": meta["heading"],
+            "description": meta["description"],
+            "datePublished": meta["published"],
+            "dateModified": meta.get("updated", meta["published"]),
+            "author": {"@id": tutor["@id"]},
+            "publisher": {"@id": business["@id"]},
+            "mainEntityOfPage": url,
+            "inLanguage": meta.get("lang", "en-GB"),
+        })
+    data = {"@context": "https://schema.org", "@graph": graph}
+    return '<script type="application/ld+json">' + json.dumps(data, ensure_ascii=False) + "</script>"
+
+
 def render_nav(current):
     links = []
     for href, label in NAV:
@@ -118,14 +186,32 @@ def main():
     version = hashlib.sha1(css + js).hexdigest()[:8]
 
     layout = (SRC / "layout.html").read_text(encoding="utf-8")
-    sitemap = []
-    for page in sorted((SRC / "pages").glob("*.html")):
+
+    # Read every page first, so the guides index can list the guides.
+    pages = []
+    for page in sorted((SRC / "pages").rglob("*.html")):
         raw = page.read_text(encoding="utf-8")
         m = re.match(r"\s*<!--\s*(\{.*?\})\s*-->\s*", raw, re.S)
         meta = json.loads(m.group(1))
-        body = raw[m.end():]
-        slug = page.stem
-        path = "/" if slug == "index" else f"/{slug}"
+        rel = page.relative_to(SRC / "pages").with_suffix("").as_posix()
+        if rel == "index":
+            path = "/"
+        elif rel.endswith("/index"):
+            path = "/" + rel[: -len("/index")]
+        else:
+            path = "/" + rel
+        pages.append({"meta": meta, "body": raw[m.end():], "rel": rel, "path": path})
+
+    guides = sorted(
+        (p for p in pages if p["meta"].get("type") == "guide" and not p["meta"].get("draft")),
+        key=lambda p: p["meta"]["published"], reverse=True,
+    )
+
+    sitemap = []
+    for p in pages:
+        meta, path = p["meta"], p["path"]
+        if meta.get("draft"):
+            continue
         robots = '<meta name="robots" content="noindex">' if meta.get("noindex") else ""
         extra = {
             "title": html.escape(meta["title"]),
@@ -135,14 +221,18 @@ def main():
             "nav": render_nav(path),
             "version": version,
             "robots": robots,
-            "jsonld": meta.get("jsonld", ""),
+            "lang": meta.get("lang", "en-GB"),
+            "jsonld": render_jsonld(meta, path),
+            "guides_list": render_guides_list(guides),
         }
-        content = fill(body, extra)
+        content = fill(p["body"], extra)
         out = fill(layout, {**extra, "content": content})
         leftover = re.findall(r"\{\{[^}]+\}\}", out)
         if leftover:
-            raise SystemExit(f"{page.name}: unfilled tokens {leftover}")
-        (OUT / f"{slug}.html").write_text(out, encoding="utf-8")
+            raise SystemExit(f"{p['rel']}: unfilled tokens {leftover}")
+        dest = OUT / (f"{p['rel'][:-len('/index')]}.html" if p['rel'].endswith('/index') else f"{p['rel']}.html")
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_text(out, encoding="utf-8")
         if not meta.get("noindex"):
             sitemap.append(SITE["site_url"] + path)
 
