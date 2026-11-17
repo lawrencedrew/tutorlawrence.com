@@ -61,6 +61,20 @@ def render_price_list(keys):
     return f'<ul class="price-list">{"".join(rows)}</ul>'
 
 
+def render_reviews(keys):
+    items = []
+    for k in keys:
+        r = SITE["reviews"][k]
+        items.append(
+            '<figure class="review">'
+            f'<blockquote><p>{html.escape(r["text"])}</p></blockquote>'
+            f'<figcaption><span class="review-name">{html.escape(r["name"])}</span> '
+            f'<span class="review-meta">{html.escape(r["context"])}, {html.escape(r["date"])}</span></figcaption>'
+            '</figure>'
+        )
+    return '<div class="reviews">' + "".join(items) + '</div><p class="reviews-note">From reviews my students left on Preply, quoted in their own words.</p>'
+
+
 def render_nav(current):
     links = []
     for href, label in NAV:
@@ -85,6 +99,7 @@ def fill(text, extra):
     }
     values.update(extra)
     text = re.sub(r"\{\{packages:([a-z,]+)\}\}", lambda m: render_packages(m.group(1).split(",")), text)
+    text = re.sub(r"\{\{reviews:([a-z,]+)\}\}", lambda m: render_reviews(m.group(1).split(",")), text)
     text = re.sub(r"\{\{pricelist:([a-z,]+)\}\}", lambda m: render_price_list(m.group(1).split(",")), text)
     return re.sub(r"\{\{(\w+)\}\}", lambda m: values.get(m.group(1), m.group(0)), text)
 

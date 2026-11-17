@@ -7,7 +7,7 @@
   "email": "lawrence@tutorlawrence.com",
   "call_minutes": 30,
   "lesson_minutes": 50,
-  "lessons": "3,600+",
+  "lessons": "3,900+",
   "students": "800+",
   "since": "2024",
   "currency": "£",
@@ -62,6 +62,44 @@
       ],
       "page": "/exam-prep",
       "payment_link": "https://buy.stripe.com/fZueVe2at8qI8kRfUqabK03"
+    }
+  },
+  "reviews": {
+    "ziad": {
+      "name": "Ziad",
+      "context": "Weekly lessons",
+      "date": "August 2026",
+      "text": "Thirty-six lessons in since December, and I've never once been tempted to stop. Lawrence listens properly; he picks up on what you're actually struggling with and shapes the lesson around it, rather than working through a script. Patient, always well prepared, and lovely company into the bargain."
+    },
+    "pavel": {
+      "name": "Pavel",
+      "context": "Business English",
+      "date": "March 2025",
+      "text": "Lawrence is not only an excellent English teacher, but he also has a great background and knowledge in business, which certainly helps in learning business English and developing not only language skills but also business knowledge. The lessons are always engaging and informative."
+    },
+    "janos": {
+      "name": "János",
+      "context": "ECL exam preparation",
+      "date": "August 2026",
+      "text": "Always punctual, patient, and attentive, correcting me only when truly necessary. He speaks genuine British English and helped me turn passive vocabulary into active, fluent speech within weeks."
+    },
+    "michael": {
+      "name": "Michael",
+      "context": "IELTS preparation",
+      "date": "March 2026",
+      "text": "Lawrence is a kind, professional, and easy-to-deal-with tutor. I feel safe and calm while talking and learning with him, as he supports my IELTS exam preparation."
+    },
+    "guido": {
+      "name": "Guido",
+      "context": "Weekly lessons",
+      "date": "November 2026",
+      "text": "He is knowledgeable, patient and professional. The lessons are always interesting, engaging and tailored to my needs. He explains things clearly and makes me feel comfortable and confident."
+    },
+    "katarzyna": {
+      "name": "Katarzyna",
+      "context": "Conversation and vocabulary",
+      "date": "March 2025",
+      "text": "He can explain the meaning of words and context of their use very well. With Lawrence I can learn what I really need, not just formulas from the text books."
     }
   }
 }
