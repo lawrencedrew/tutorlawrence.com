@@ -76,17 +76,45 @@ def render_reviews(keys):
     return '<div class="reviews">' + "".join(items) + '</div><p class="reviews-note">From reviews my students left on Preply, quoted in their own words.</p>'
 
 
+TOPIC_ORDER = ["Business emails", "Meetings and speaking at work", "Job interviews", "IELTS", "ECL exam",
+               "Common mistakes", "Vocabulary and pronunciation"]
+
+
 def render_guides_list(guides):
-    if not guides:
+    en = [g for g in guides if g["meta"].get("lang", "en") == "en"]
+    if not en:
         return ""
-    items = []
-    for g in guides:
-        m = g["meta"]
-        items.append(
-            f'<li class="guide-item"><a href="{g["path"]}"><span class="guide-title">{html.escape(m["heading"])}</span>'
-            f'<span class="guide-summary">{html.escape(m["description"])}</span></a></li>'
-        )
-    return '<ul class="guide-list">' + "".join(items) + "</ul>"
+    groups = {}
+    for g in en:
+        groups.setdefault(g["meta"].get("topic", "More guides"), []).append(g)
+    order = [t for t in TOPIC_ORDER if t in groups] + [t for t in groups if t not in TOPIC_ORDER]
+    out = []
+    if len(order) > 1:
+        out.append('<nav class="topic-nav" aria-label="Guide topics"><ul>' + "".join(
+            f'<li><a href="#{slugify(t)}">{html.escape(t)}</a></li>' for t in order) + "</ul></nav>")
+    for t in order:
+        items = sorted(groups[t], key=lambda g: g["meta"]["heading"])
+        lis = "".join(
+            f'<li class="guide-item"><a href="{g["path"]}"><span class="guide-title">{html.escape(g["meta"]["heading"])}</span>'
+            f'<span class="guide-summary">{html.escape(g["meta"]["description"])}</span></a></li>' for g in items)
+        out.append(f'<section class="guide-group" id="{slugify(t)}"><h2>{html.escape(t)}</h2><ul class="guide-list">{lis}</ul></section>')
+    return "".join(out)
+
+
+def render_lang_list(pages, lang, here):
+    items = [p for p in pages if p["meta"].get("lang") == lang and p["path"] != here
+             and not p["meta"].get("draft") and p["meta"].get("type") in ("guide", "landing")]
+    if not items:
+        return ""
+    lis = "".join(
+        f'<li class="guide-item"><a href="{p["path"]}"><span class="guide-title">{html.escape(p["meta"].get("heading", p["meta"]["title"]))}</span>'
+        f'<span class="guide-summary">{html.escape(p["meta"]["description"])}</span></a></li>' for p in sorted(items, key=lambda p: p["path"]))
+    heading = {"hu": "További oldalak", "pl": "Więcej stron", "es": "Más páginas", "it": "Altre pagine"}.get(lang, "More")
+    return f'<h2>{heading}</h2><ul class="guide-list">{lis}</ul>'
+
+
+def slugify(t):
+    return re.sub(r"[^a-z0-9]+", "-", t.lower()).strip("-")
 
 
 def render_jsonld(meta, path):
@@ -226,6 +254,7 @@ def main():
             "lang": meta.get("lang", "en-GB"),
             "jsonld": render_jsonld(meta, path),
             "guides_list": render_guides_list(guides),
+            "lang_list": render_lang_list(pages, meta.get("lang", "en"), path),
         }
         extra["signup_scripts"] = ""
         content = fill(p["body"], extra)
