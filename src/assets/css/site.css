@@ -326,3 +326,7 @@ a:hover { color: var(--pen-dark); }
 .signup button.button { font: inherit; font-weight: 600; border: 0; cursor: pointer; }
 .compare.plain td:first-child { color: var(--ink); text-decoration: none; font-weight: 600; }
 .source { font-size: var(--step--1); color: var(--ink-soft); }
+.topic-nav ul { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; margin-bottom: 2.5rem; }
+.topic-nav a { font-weight: 600; }
+.guide-group { margin-bottom: 3rem; }
+.guide-group h2 { font-size: var(--step-2); margin-bottom: 0.75rem; scroll-margin-top: 5rem; }
