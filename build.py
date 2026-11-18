@@ -167,6 +167,8 @@ def fill(text, extra):
     }
     values.update(extra)
     text = re.sub(r"\{\{packages:([a-z,]+)\}\}", lambda m: render_packages(m.group(1).split(",")), text)
+    if "{{signup}}" in text:
+        text = text.replace("{{signup}}", (SRC / "partials" / "signup.html").read_text(encoding="utf-8").replace("{{signup_id}}", "a"), 1)
     text = re.sub(r"\{\{reviews:([a-z,]+)\}\}", lambda m: render_reviews(m.group(1).split(",")), text)
     text = re.sub(r"\{\{pricelist:([a-z,]+)\}\}", lambda m: render_price_list(m.group(1).split(",")), text)
     return re.sub(r"\{\{(\w+)\}\}", lambda m: values.get(m.group(1), m.group(0)), text)
@@ -225,7 +227,16 @@ def main():
             "jsonld": render_jsonld(meta, path),
             "guides_list": render_guides_list(guides),
         }
+        extra["signup_scripts"] = ""
         content = fill(p["body"], extra)
+        if 'ml-subscribe-form-48738236' in content:
+            extra["signup_scripts"] = (
+                '<script>function ml_webform_success_48738236(){var $=ml_jQuery||jQuery;'
+                '$(".ml-subscribe-form-48738236 .row-success").show();$(".ml-subscribe-form-48738236 .row-form").hide();}</script>\n'
+                '<script src="https://www.google.com/recaptcha/api.js" async defer></script>\n'
+                '<script src="https://groot.mailerlite.com/js/w/webforms.min.js?v83147fa8ce2d95cb73ece7f28b469519"></script>\n'
+                '<script>fetch("https://assets.mailerlite.com/jsonp/2807138/forms/204499188840399998/takel")</script>'
+            )
         out = fill(layout, {**extra, "content": content})
         leftover = re.findall(r"\{\{[^}]+\}\}", out)
         if leftover:

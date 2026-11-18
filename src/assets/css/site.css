@@ -309,3 +309,18 @@ a:hover { color: var(--pen-dark); }
 .guide-cta { margin-top: 2.5rem !important; padding: 1.5rem; background: var(--paper); border-left: 4px solid var(--highlighter); display: grid; gap: 0.9rem; }
 .download { max-width: 46rem; padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--sheet); border: 1px solid var(--rule); border-top: 4px solid var(--highlighter); display: grid; gap: 1rem; }
 .download h2 { font-size: var(--step-2); }
+
+/* ---------- PDF sign-up ---------- */
+.signup { max-width: 46rem; padding: clamp(1.5rem, 4vw, 2.5rem); background: var(--sheet); border: 1px solid var(--rule); border-top: 4px solid var(--highlighter); }
+.signup h2 { font-size: var(--step-2); margin-bottom: 0.75rem; }
+.signup p { margin-bottom: 1.25rem; }
+.signup-fields { display: grid; gap: 1rem; margin-bottom: 1rem; }
+@media (min-width: 40rem) { .signup-fields { grid-template-columns: 1fr 1.4fr; } }
+.signup label { display: block; font-weight: 600; font-size: var(--step--1); margin-bottom: 0.35rem; }
+.signup input[type=text], .signup input[type=email] { width: 100%; font: inherit; padding: 0.7rem 0.8rem; border: 1px solid var(--rule); border-radius: 6px; background: #fff; color: var(--ink); }
+.signup input:focus { outline: 2px solid var(--pen); outline-offset: 1px; }
+.signup .ml-error input { border-color: #d1453b; }
+.signup .ml-form-recaptcha { margin-bottom: 1rem; }
+.signup .ml-form-embedSubmit { margin-bottom: 0.75rem; }
+.signup-small { font-size: var(--step--1); color: var(--ink-soft); margin: 0 !important; }
+.signup button.button { font: inherit; font-weight: 600; border: 0; cursor: pointer; }
